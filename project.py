@@ -17,10 +17,13 @@ window.title('Hang Man')
 window.geometry("900x450+250+150")
 
 # 設定玩家一的輸入位置
+# 一行字顯示：玩家一請出題
 label = tk.Label(window, text = '玩家一請出題')
 label.pack()
+# 玩家一請輸入：
 player_one_entry = tk.Entry(window)
 player_one_entry.pack()
+# 輸入完成按ok的按鈕
 button = tk.Button(window, text = "OK", command = anagram())
 button.pack()
 

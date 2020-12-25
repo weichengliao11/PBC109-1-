@@ -1,4 +1,5 @@
 #TO 廖：目前第2到第151行是遊戲進行的部份，我把可能要呈現在螢幕上的東西，在程式碼裡面用print表示，包含draw、talk result、miss、hint，我猜你是要改寫＠陳 寫的182行到188行的code BY鄧
+"""
 def game(answer):
 
     #這部分是遊戲進行中，要印出來的東西
@@ -31,9 +32,9 @@ def game(answer):
         guess = input()
 
         #這部分避免玩家猜亂打一些東西，而給出相對應的回饋        
-        alp = "abcdefghijklmnopqrstuvwxyz" 
-        if guess not in alp: #如果他猜的不是英文
-            talk = "這不是英文字母喔，猜個英文字母吧！"
+        alp = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ" 
+        if guess not in alp or len(guess) != 1: #如果他猜的不是英文
+            talk = "格式好像不太對唷～請猜一個一文字母吧！"
             print(talk)
 
         elif guess in missed_letter: #如果他猜的是猜過且猜錯的
@@ -144,58 +145,71 @@ def game(answer):
                 print(miss)
                 print(talk)
                 print(result)
+                break
 
     return talk
     return result
     return miss
     return hint
-
+"""
 # 引入 tkinter 模組
 import tkinter as tk
 
-def anagram():
-    # 取得輸入文字
-    print("輸入完畢！")
-    answer = format(player_one_entry.get())
+def NewWindow():
+    newWindow = tk.Toplevel(window)
+    newWindow.geometry("900x450+250+150")
+    newWindow.title("HangMan")
+    title_entry = tk.Label(newWindow, text = "Hang Man" , font = ("" , 36) , bg = "gray" , fg = "red")
+    title_entry.pack(side = "top")
+    canvas = tk.Canvas(newWindow, width = 900 , height = 300 , bg = "green")
+    canvas.pack(side = "bottom")
+    label = tk.Label(newWindow, text = "玩家二請猜字").pack()
+    player_two_entry = tk.Text(newWindow, width = 15 , height = 3).pack()
+    button = tk.Button(newWindow, text = "輸入").pack()
+    answer = player_one_entry.get(1.0 , tk.END + "-1c")
     return answer
+    #game(answer)
 
 # 建立主視窗 Frame
 window = tk.Tk()
-
 # 設定視窗標題
 window.title('Hang Man')
-
 # 設定視窗大小為 900x450，視窗（左上角）在螢幕上的座標位置為 (250, 150)
 window.geometry("900x450+250+150")
-
+canvas = tk.Canvas(window, width = 900 , height = 300 , bg = "green")
+canvas.pack(side = "bottom")
+title_entry = tk.Label(window, text = "Hang Man" , font = ("" , 36) , bg = "gray" , fg = "red")
+title_entry.pack(side = "top")
 # 設定玩家一的輸入位置
 # 一行字顯示：玩家一請出題
-label_entry = tk.Label(window, text='玩家一請出題')
+label_entry = tk.Label(window, text = '玩家一請出題')
 label_entry.pack()
 # 玩家一請輸入：
-player_one_entry = tk.Entry(window)
+player_one_entry = tk.Text(window, width = 15 , height = 3)
 player_one_entry.pack()
 # 輸入完成按ok的按鈕
-button_entry = tk.Button(window, text="OK", command=anagram())
+button_entry = tk.Button(window, text = "OK", bg = "yellow" , fg = "blue" , command = NewWindow)
 button_entry.pack()
 
 # 這段要放吊死人那段 code
-game(answer)
+
 # 結果是 result
 
 # 結果是猜對了還是被吊死了
-result = True
+#result = True
 
 # 結束遊戲
-if result == True:
-    label_close = tk.Label(window, text='你猜對了！')
+"""
+if result:
+    label_close = tk.Label(window, text = '你猜對了！')
 else:
-    label_close = tk.Label(window, text='你死了！')
+    label_close = tk.Label(window, text = '你死了！')
 label_close.pack()
 
-button_play_again = tk.Button(window, text="Play Again", command=anagram())
-button_close = tk.Button(window, text="Leave")
+button_play_again = tk.Button(window, text = "Play Again")
+button_close = tk.Button(window, text = "Leave")
 button_play_again.pack()
 button_close.pack()
+"""
 # 執行主程式
 window.mainloop()

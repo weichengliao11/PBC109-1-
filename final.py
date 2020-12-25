@@ -41,6 +41,9 @@ def inputWord():
 				else:
 					window.destroy()
 
+def enter(event):
+	inputWord()
+
 
 window = tk.Tk()
 window.title("HangMan")
@@ -74,7 +77,7 @@ inputEntry.place(x = 275 , y = 200)
 #button
 button1 = tk.Button(window, text = "送出" , font = ("" , 25) , bg = "black" , fg = "red" , command = inputWord)
 button1.place(x = 420 , y = 300)
-
+window.bind("<Return>" , enter)
 #如何選擇題目
 def chooseword():
 	global word , word_len , guessed , not_yet_choosed , left_word_len , copy_word

@@ -3,14 +3,13 @@ import random
 import tkinter.messagebox
 
 wordlist = ["soccer" , "basketball" , "international" , "buisness"]
-
+left_chances = 5
 
 def inputWord():
-	global word , word_len , guessed , not_yet_choosed , left_word_len , copy_word
+	global word , word_len , guessed , not_yet_choosed , left_word_len , copy_word , left_chances
 	keyword = entry.get()
 
 	if word_len > 0:
-		left_chances = 5
 		if (keyword in word):
 			for i in range(word_len):
 				if word[i] == keyword and not_yet_choosed[i] == "*":
@@ -22,7 +21,6 @@ def inputWord():
 					#print(left_word_len)
 
 					if ans == word:
-						answer.configure(text = "你贏了！")
 						message = tk.messagebox.askyesno(title = "HangMan" , message = "You won! \n Want to play again?")
 
 						if message == True:
@@ -37,7 +35,7 @@ def inputWord():
 				leftchancelabel.configure(text = "Left Chances = {}".format(left_chances))
 
 			elif left_chances == 0:
-				gameover = tk.messagebox.showwarning(title = "HangMan" , message = "Game over! \n Want to play again?")
+				gameover = tk.messagebox.askyesno(title = "HangMan" , message = "Game over! \n Want to play again?")
 				if gameover == True:
 					chooseword()
 				else:
@@ -66,8 +64,7 @@ leftwordlabel.place(x = 700 , y = 75)
 leftchancelabel = tk.Label(window, text = "Left Chances = 5" , font = ("" , 25) , bg = "gray" , fg = "black")
 leftchancelabel.place(x = 700 , y = 150)
 
-answer = tk.Label(window, text = "" , font = ("" , 25) , bg = "gray" , fg = "black")
-answer.place(x = 300 , y = 400)
+
 
 #Entry
 entry = tk.StringVar()

@@ -1,8 +1,11 @@
 import tkinter as tk
 import random
 import tkinter.messagebox
+import p_new as file
 
-wordlist = ["soccer" , "basketball" , "international" , "buisness"]
+
+
+#wordlist = ["soccer" , "basketball" , "international" , "buisness"]
 left_chances = 5
 
 def inputWord():
@@ -87,7 +90,7 @@ window.bind("<Return>" , call_inputWord)
 #如何選擇題目
 def chooseword():
 	global word , word_len , guessed , not_yet_choosed , left_word_len , copy_word
-	word = random.choice(wordlist)
+	word = random.choice(file.dictionary())
 	print(word)
 	not_yet_choosed = ["*" for i in word]
 	copy_word = word

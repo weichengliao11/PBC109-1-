@@ -9,6 +9,9 @@ left_chances = 5
 def inputWord():
 	global word , word_len , guessed , not_yet_choosed , left_word_len , copy_word , left_chances
 	keyword = entry.get()
+	if keyword in "ABCDEFGHIJKLMNOPQRSTUVWXYZ":
+		keyword = file.alphabet_change(keyword)
+
 	inputEntry.delete(0 , "end")
 
 	if word_len > 0:
@@ -32,6 +35,19 @@ def inputWord():
 						else:
 							window.destroy()
 
+
+		elif len(keyword) > 1:
+			warning = tk.messagebox.showwarning(title = "HangMan" , message = "只能輸入一個字母！")
+
+		elif keyword not in "abcdefghijklmnopqrstuvwxyz":
+			warning = tk.messagebox.showwarning(title = "HangMan" , message = "你輸入的不是英文喔！\n請輸入英文字母！")
+
+		else:
+			if left_chances > 0:
+				left_chances -= 1
+				leftchancelabel.configure(text = "Left Chances = {}".format(left_chances))
+				"""
+=======
 		else:
 			if left_chances > 0:
 				left_chances -= 1
@@ -68,16 +84,18 @@ def inputWord():
 					imLabel = tk.Label(window, image=img)
 					imLabel.place(x=450, y=100)
 					leftchancelabel.configure(text = "Left Chances = {}".format(left_chances))
+				"""
 
-					if left_chances == 0:
-						gameover = tk.messagebox.askyesno(title = "HangMan" , message = "Game over!\nThe answer is" + "\n" + word + "\nWant to play again?")
+				if left_chances == 0:
+					gameover = tk.messagebox.askyesno(title = "HangMan" , message = "Game over!\nThe answer is" + "\n" + word + "\nWant to play again?")
 
-						if gameover == True:
-							left_chances = 5
-							chooseword()
-							leftchancelabel.configure(text = "Left Chances = 5")
-						else:
-							window.destroy()
+					if gameover == True:
+						left_chances = 5
+						chooseword()
+						leftchancelabel.configure(text = "Left Chances = 5")
+					else:
+						window.destroy()
+
 
 def call_inputWord(event):
 	inputWord()
@@ -100,14 +118,15 @@ wordlabel.place(x = 50 , y = 100)
 guesslabel = tk.Label(window, text = "" , font = ("" , 25) , bg = "gray" , fg = "blue")
 guesslabel.place(x = 50 , y = 150)
 
+rulelabel = tk.Label(window, text = "遊戲規則：簡單來說，就是猜英文單字遊戲！\n如果你猜不到單字，牙籤人就會被吊死><\n請在空白格內輸入「一個英文字母」\n「＊」符號代表英文單字的長度，有幾個「＊」就有幾個字母\n若該字母有出現在單字中，按下送出後字母會出現在正確的位置上\n若該字母不在單字中，代表你猜錯了\n牙籤人會逐漸邁向死亡!\n你有五次猜錯字母的機會，加油！\n（注意：一次只能輸入一個英文字母" , font = ("" , 14) , bg = "yellow" , fg = "black")
+rulelabel.place(x = 450 , y = 100)
+"""
 img = Image.open('1 .jpg')
 img = img.resize((400, 300), Image.ANTIALIAS)
 img = ImageTk.PhotoImage(img)
 imLabel = tk.Label(window, image=img)
 imLabel.place(x=450, y=100)
-
-# leftwordlabel = tk.Label(window, text = "" , font = ("" , 25) , bg = "gray" , fg = "black")
-# leftwordlabel.place(x = 500 , y = 75)
+"""
 
 leftchancelabel = tk.Label(window, text = "Left Chances = 5" , font = ("" , 25) , bg = "gray" , fg = "black")
 leftchancelabel.place(x = 450 , y = 412)
@@ -122,16 +141,18 @@ inputEntry.place(x = 50 , y = 200)
 button1 = tk.Button(window, text = "送出" , font = ("" , 25) , bg = "black" , fg = "red" , command = inputWord)
 button1.place(x = 50 , y = 300)
 window.bind("<Return>" , call_inputWord)
+
+
+
 #如何選擇題目
 def chooseword():
-	global word , word_len , guessed , not_yet_choosed , left_word_len , copy_word
+	global word , word_len , guessed , not_yet_choosed , copy_word , left_chances
 	word = random.choice(file.dictionary())
 	print(word)
 	not_yet_choosed = ["*" for i in word]
 	copy_word = word
 	word_len = len(word)
 	left_word_len = word_len
-	#leftwordlabel.configure(text = "Left Words = {}".format(left_word_len))
 
 	guessed = ""
 	for i in not_yet_choosed:

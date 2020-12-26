@@ -2,6 +2,7 @@ import tkinter as tk
 import random
 import tkinter.messagebox
 import p_new as file
+from PIL import Image, ImageTk
 
 left_chances = 5
 
@@ -54,36 +55,41 @@ def call_inputWord(event):
 
 window = tk.Tk()
 window.title("HangMan")
-window.geometry("900x450")
+window.geometry("900x480")
 window.configure(bg = "gray")
 
 
 #Labels
-introlabel = tk.Label(window, text = "HangMan Game" , font = ("" , 72) , bg = "gray" , fg = "red")
+introlabel = tk.Label(window, text = "HangMan Game" , font = ("" , 72) , bg = "gray" , fg = "black")
 introlabel.place(x = 200 , y = 0)
 
 wordlabel = tk.Label(window, text = "Guess" , font = ("" , 25) , bg = "gray" , fg = "blue")
-wordlabel.place(x = 400 , y = 100)
+wordlabel.place(x = 50 , y = 100)
 
 guesslabel = tk.Label(window, text = "" , font = ("" , 25) , bg = "gray" , fg = "blue")
-guesslabel.place(x = 375 , y = 150)
+guesslabel.place(x = 50 , y = 150)
 
-leftwordlabel = tk.Label(window, text = "" , font = ("" , 25) , bg = "gray" , fg = "black")
-leftwordlabel.place(x = 700 , y = 75)
+img = Image.open('1 .jpg')
+img = img.resize((400, 300), Image.ANTIALIAS)
+img = ImageTk.PhotoImage(img)
+imLabel = tk.Label(window, image=img)
+imLabel.place(x=450, y=100)
+
+# leftwordlabel = tk.Label(window, text = "" , font = ("" , 25) , bg = "gray" , fg = "black")
+# leftwordlabel.place(x = 500 , y = 75)
 
 leftchancelabel = tk.Label(window, text = "Left Chances = 5" , font = ("" , 25) , bg = "gray" , fg = "black")
-leftchancelabel.place(x = 700 , y = 150)
-
+leftchancelabel.place(x = 450 , y = 412)
 
 
 #Entry
 entry = tk.StringVar()
 inputEntry = tk.Entry(window, font = ("" , 25) , justify = "center" , textvariable = entry)
-inputEntry.place(x = 275 , y = 200)
+inputEntry.place(x = 50 , y = 200)
 
 #button
 button1 = tk.Button(window, text = "送出" , font = ("" , 25) , bg = "black" , fg = "red" , command = inputWord)
-button1.place(x = 420 , y = 300)
+button1.place(x = 50 , y = 300)
 window.bind("<Return>" , call_inputWord)
 #如何選擇題目
 def chooseword():

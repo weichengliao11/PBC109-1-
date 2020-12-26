@@ -6,7 +6,7 @@ import p_new as file
 left_chances = 5
 
 def inputWord():
-	global word , word_len , guessed , not_yet_choosed , left_word_len , copy_word , left_chances
+	global word , word_len , guessed , not_yet_choosed , copy_word , left_chances
 	keyword = entry.get()
 	inputEntry.delete(0 , "end")
 
@@ -47,6 +47,11 @@ def inputWord():
 					else:
 						window.destroy()
 
+
+def get_clue():
+	global word , word_len , guessed , not_yet_choosed , copy_word , left_chances
+					
+
 def call_inputWord(event):
 	inputWord()
 
@@ -68,11 +73,8 @@ wordlabel.place(x = 400 , y = 100)
 guesslabel = tk.Label(window, text = "" , font = ("" , 25) , bg = "gray" , fg = "blue")
 guesslabel.place(x = 375 , y = 150)
 
-leftwordlabel = tk.Label(window, text = "" , font = ("" , 25) , bg = "gray" , fg = "black")
-leftwordlabel.place(x = 700 , y = 75)
-
 leftchancelabel = tk.Label(window, text = "Left Chances = 5" , font = ("" , 25) , bg = "gray" , fg = "black")
-leftchancelabel.place(x = 700 , y = 150)
+leftchancelabel.place(x = 700 , y = 75)
 
 
 
@@ -85,16 +87,18 @@ inputEntry.place(x = 275 , y = 200)
 button1 = tk.Button(window, text = "送出" , font = ("" , 25) , bg = "black" , fg = "red" , command = inputWord)
 button1.place(x = 420 , y = 300)
 window.bind("<Return>" , call_inputWord)
+
+clue_button = tk.Button(window, text = "提示" , font = ("" , 25) , bg = "black" , fg = "red")
+clue_button.place(x = 700 , y = 300)
+
 #如何選擇題目
 def chooseword():
-	global word , word_len , guessed , not_yet_choosed , left_word_len , copy_word
+	global word , word_len , guessed , not_yet_choosed , copy_word , left_chances
 	word = random.choice(file.dictionary())
 	print(word)
 	not_yet_choosed = ["*" for i in word]
 	copy_word = word
 	word_len = len(word)
-	left_word_len = word_len
-	#leftwordlabel.configure(text = "Left Words = {}".format(left_word_len))
 
 	guessed = ""
 	for i in not_yet_choosed:
@@ -106,3 +110,6 @@ def chooseword():
 chooseword()
 
 window.mainloop()
+
+
+

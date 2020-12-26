@@ -5,14 +5,16 @@ import p_new as file
 from PIL import Image, ImageTk
 
 left_chances = 5
+wrong_words_list = []
 
 def inputWord():
-	global word , word_len , guessed , not_yet_choosed , left_word_len , copy_word , left_chances
+	global word , word_len , guessed , not_yet_choosed , left_word_len , copy_word , left_chances , wrong_words_list
 	keyword = entry.get()
 	if keyword in "ABCDEFGHIJKLMNOPQRSTUVWXYZ":
 		keyword = file.alphabet_change(keyword)
 
 	inputEntry.delete(0 , "end")
+	wrong_word = ""
 
 	if word_len > 0:
 		if (keyword in word):
@@ -45,9 +47,14 @@ def inputWord():
 		else:
 			if left_chances > 0:
 				left_chances -= 1
+				if wrong_word not in wrong_words_list:
+					wrong_word += (keyword + "、")
+
+				wrong_words_list.append(keyword)
+				wrongwordlabel.configure(text = "猜錯的字：" + wrong_word)
 				leftchancelabel.configure(text = "Left Chances = {}".format(left_chances))
 				"""
-=======
+
 		else:
 			if left_chances > 0:
 				left_chances -= 1
@@ -100,14 +107,14 @@ def inputWord():
 def call_inputWord(event):
 	inputWord()
 
+#def wrong_word():
+
 
 
 window = tk.Tk()
 window.title("HangMan")
 window.geometry("900x480")
 window.configure(bg = "gray")
-
-
 #Labels
 introlabel = tk.Label(window, text = "HangMan Game" , font = ("" , 72) , bg = "gray" , fg = "black")
 introlabel.place(x = 200 , y = 0)
@@ -130,6 +137,9 @@ imLabel.place(x=450, y=100)
 
 leftchancelabel = tk.Label(window, text = "Left Chances = 5" , font = ("" , 25) , bg = "gray" , fg = "black")
 leftchancelabel.place(x = 450 , y = 412)
+
+wrongwordlabel = tk.Label(window, text = "猜錯的字：" , font = ("" , 20) , bg = "yellow" , fg = "black")
+wrongwordlabel.place(x = 50 , y = 270)
 
 
 #Entry

@@ -3,15 +3,12 @@ import random
 import tkinter.messagebox
 import p_new as file
 
-
-
-#wordlist = ["soccer" , "basketball" , "international" , "buisness"]
 left_chances = 5
 
 def inputWord():
 	global word , word_len , guessed , not_yet_choosed , left_word_len , copy_word , left_chances
 	keyword = entry.get()
-	inputEntry.delete(0)
+	inputEntry.delete(0 , "end")
 
 	if word_len > 0:
 		if (keyword in word):
@@ -28,8 +25,9 @@ def inputWord():
 						message = tk.messagebox.askyesno(title = "HangMan" , message = "You won!\nThe answer is" + "\n" + word + "\nWant to play again?")
 
 						if message == True:
-							window.update()
+							left_chances = 5
 							chooseword()
+							leftchancelabel.configure(text = "Left Chances = 5")
 						else:
 							window.destroy()
 
@@ -39,19 +37,19 @@ def inputWord():
 				print(left_chances)
 				leftchancelabel.configure(text = "Left Chances = {}".format(left_chances))
 
-			elif left_chances == 0:
-				gameover = tk.messagebox.askyesno(title = "HangMan" , message = "Game over!\nThe answer is" + "\n" + word + "\nWant to play again?")
-				if gameover == True:
-					window.update()
-					chooseword()
-				else:
-					window.destroy()
+				if left_chances == 0:
+					gameover = tk.messagebox.askyesno(title = "HangMan" , message = "Game over!\nThe answer is" + "\n" + word + "\nWant to play again?")
+
+					if gameover == True:
+						left_chances = 5
+						chooseword()
+						leftchancelabel.configure(text = "Left Chances = 5")
+					else:
+						window.destroy()
 
 def call_inputWord(event):
 	inputWord()
 
-def updateinterface():
-	window.update()
 
 
 window = tk.Tk()
@@ -84,7 +82,7 @@ inputEntry = tk.Entry(window, font = ("" , 25) , justify = "center" , textvariab
 inputEntry.place(x = 275 , y = 200)
 
 #button
-button1 = tk.Button(window, text = "送出" , font = ("" , 25) , bg = "black" , fg = "red" , command = lambda:[inputWord , updateinterface])
+button1 = tk.Button(window, text = "送出" , font = ("" , 25) , bg = "black" , fg = "red" , command = inputWord)
 button1.place(x = 420 , y = 300)
 window.bind("<Return>" , call_inputWord)
 #如何選擇題目
@@ -103,6 +101,7 @@ def chooseword():
 		guessed += i + " "
 
 	guesslabel.configure(text = guessed)
+	inputEntry.delete(0 , "end")
 
 chooseword()
 

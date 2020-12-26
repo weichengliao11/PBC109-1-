@@ -51,13 +51,7 @@ def inputWord():
 					img = ImageTk.PhotoImage(img)
 					imLabel = tk.Label(window, image=img)
 					imLabel.place(x=450, y=100)
-
-				if left_chances == 2:
-					img = Image.open('4 .jpg')
-					img = img.resize((400, 300), Image.ANTIALIAS)
-					img = ImageTk.PhotoImage(img)
-					imLabel = tk.Label(window, image=img)
-					imLabel.place(x=450, y=100)
+					leftchancelabel.configure(text = "Left Chances = {}".format(left_chances))
 
 				if left_chances == 2:
 					img = Image.open('5 .jpg')
@@ -65,6 +59,7 @@ def inputWord():
 					img = ImageTk.PhotoImage(img)
 					imLabel = tk.Label(window, image=img)
 					imLabel.place(x=450, y=100)
+					leftchancelabel.configure(text = "Left Chances = {}".format(left_chances))
 
 				if left_chances == 1:
 					img = Image.open('6 .jpg')
@@ -72,6 +67,7 @@ def inputWord():
 					img = ImageTk.PhotoImage(img)
 					imLabel = tk.Label(window, image=img)
 					imLabel.place(x=450, y=100)
+					leftchancelabel.configure(text = "Left Chances = {}".format(left_chances))
 
 					if left_chances == 0:
 						gameover = tk.messagebox.askyesno(title = "HangMan" , message = "Game over!\nThe answer is" + "\n" + word + "\nWant to play again?")

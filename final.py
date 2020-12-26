@@ -8,6 +8,7 @@ left_chances = 5
 def inputWord():
 	global word , word_len , guessed , not_yet_choosed , left_word_len , copy_word , left_chances
 	keyword = entry.get()
+	inputEntry.delete(0)
 
 	if word_len > 0:
 		if (keyword in word):
@@ -21,9 +22,10 @@ def inputWord():
 					#print(left_word_len)
 
 					if ans == word:
-						message = tk.messagebox.askyesno(title = "HangMan" , message = "You won! \n Want to play again?")
+						message = tk.messagebox.askyesno(title = "HangMan" , message = "You won!\nThe answer is" + "\n" + word + "\nWant to play again?")
 
 						if message == True:
+							window.update()
 							chooseword()
 						else:
 							window.destroy()
@@ -35,14 +37,18 @@ def inputWord():
 				leftchancelabel.configure(text = "Left Chances = {}".format(left_chances))
 
 			elif left_chances == 0:
-				gameover = tk.messagebox.askyesno(title = "HangMan" , message = "Game over! \n Want to play again?")
+				gameover = tk.messagebox.askyesno(title = "HangMan" , message = "Game over!\nThe answer is" + "\n" + word + "\nWant to play again?")
 				if gameover == True:
+					window.update()
 					chooseword()
 				else:
 					window.destroy()
 
-def enter(event):
+def call_inputWord(event):
 	inputWord()
+
+def updateinterface():
+	window.update()
 
 
 window = tk.Tk()
@@ -75,9 +81,9 @@ inputEntry = tk.Entry(window, font = ("" , 25) , justify = "center" , textvariab
 inputEntry.place(x = 275 , y = 200)
 
 #button
-button1 = tk.Button(window, text = "送出" , font = ("" , 25) , bg = "black" , fg = "red" , command = inputWord)
+button1 = tk.Button(window, text = "送出" , font = ("" , 25) , bg = "black" , fg = "red" , command = lambda:[inputWord , updateinterface])
 button1.place(x = 420 , y = 300)
-window.bind("<Return>" , enter)
+window.bind("<Return>" , call_inputWord)
 #如何選擇題目
 def chooseword():
 	global word , word_len , guessed , not_yet_choosed , left_word_len , copy_word
@@ -87,7 +93,7 @@ def chooseword():
 	copy_word = word
 	word_len = len(word)
 	left_word_len = word_len
-	leftwordlabel.configure(text = "Left Words = {}".format(left_word_len))
+	#leftwordlabel.configure(text = "Left Words = {}".format(left_word_len))
 
 	guessed = ""
 	for i in not_yet_choosed:

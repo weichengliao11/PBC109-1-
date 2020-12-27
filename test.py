@@ -2,6 +2,7 @@ import tkinter as tk
 import random
 import tkinter.messagebox
 import p_new as file #單字以及大小寫切換function
+import string
 from PIL import Image, ImageTk
 
 left_chances = 5 #總共五次機會
@@ -32,11 +33,11 @@ def countdown():
 
 #主要的function
 def inputWord():
-	global word , word_len , guessed , not_yet_choosed , left_word_len , left_chances , wrong_words_list , wrong_word , time
+	global left_chances , wrong_words_list , wrong_word , time
 	#取得輸入的東西
 	keyword = entry.get()
 	#如果輸入的是一個大寫的英文字母
-	if keyword in "ABCDEFGHIJKLMNOPQRSTUVWXYZ" and len(keyword) == 1:
+	if keyword in string.ascii_uppercase: #A~Z
 		#轉成小寫的
 		keyword = file.alphabet_change(keyword)
 
@@ -83,7 +84,7 @@ def inputWord():
 			warning = tk.messagebox.showwarning(title = "HangMan" , message = "只能輸入一個字母！")
 
 		#如果輸入的不是英文字母
-		elif keyword not in "abcdefghijklmnopqrstuvwxyz":
+		elif keyword not in string.ascii_lowercase:
 			warning = tk.messagebox.showwarning(title = "HangMan" , message = "你輸入的不是英文喔！\n請輸入英文字母！")
 
 		#如果格式正確但是猜錯的話
@@ -99,60 +100,86 @@ def inputWord():
 				wrong_words_list.append(keyword) 
 				wrongwordlabel.configure(text = "猜錯的字：" + wrong_word)
 				leftchancelabel.configure(text = "Left Chances = {}".format(left_chances))
+				
+
+			"""
+			if left_chances == 4:
+				img = Image.open('2 .jpg')
+				img = img.resize((400, 300), Image.ANTIALIAS)
+				img = ImageTk.PhotoImage(img)
+				imLabel = tk.Label(window, image=img)
+				imLabel.place(x=450, y=100)
+				imLabel.image = img
+
+				leftchancelabel.configure(text = "Left Chances = {}".format(left_chances))
+
+			if left_chances == 3:
+				img = Image.open('3 .jpg')
+				img = img.resize((400, 300), Image.ANTIALIAS)
+				img = ImageTk.PhotoImage(img)
+				imLabel = tk.Label(window, image=img)
+				imLabel.place(x=450, y=100)
+				imLabel.image = img
+
+				leftchancelabel.configure(text = "Left Chances = {}".format(left_chances))
+
+			if left_chances == 2:
+				img = Image.open('5 .jpg')
+				img = img.resize((400, 300), Image.ANTIALIAS)
+				img = ImageTk.PhotoImage(img)
+				imLabel = tk.Label(window, image=img)
+				imLabel.place(x=450, y=100)
+				imLabel.image = img
+
+				leftchancelabel.configure(text = "Left Chances = {}".format(left_chances))
+
+			if left_chances == 1:
+				img = Image.open('6 .jpg')
+				img = img.resize((400, 300), Image.ANTIALIAS)
+				img = ImageTk.PhotoImage(img)
+				imLabel = tk.Label(window, image=img)
+				imLabel.place(x=450, y=100)
+				imLabel.image = img
+
+				leftchancelabel.configure(text = "Left Chances = {}".format(left_chances))
+			"""
+			if left_chances == 0:
+				"""
+				img = Image.open('6 .jpg')
+				img = img.resize((400, 300), Image.ANTIALIAS)
+				img = ImageTk.PhotoImage(img)
+				imLabel = tk.Label(window, image=img)
+				imLabel.place(x=450, y=100)
+				imLabel.image = img
 				"""
 
-		else:
-			if left_chances > 0:
-				left_chances -= 1
+				#leftchancelabel.configure(text = "Left Chances = {}".format(left_chances))
 
-				if left_chances == 4:
-					img = Image.open('2 .jpg')
-					img = img.resize((400, 300), Image.ANTIALIAS)
-					img = ImageTk.PhotoImage(img)
-					imLabel = tk.Label(window, image=img)
-					imLabel.place(x=450, y=100)
-					print(left_chances)
-					leftchancelabel.configure(text = "Left Chances = {}".format(left_chances))
+				gameover = tk.messagebox.askyesno(title = "HangMan" , message = "Game over!\nThe answer is" + "\n" + word + "\nWant to play again?")
 
-				if left_chances == 3:
-					img = Image.open('3 .jpg')
-					img = img.resize((400, 300), Image.ANTIALIAS)
-					img = ImageTk.PhotoImage(img)
-					imLabel = tk.Label(window, image=img)
-					imLabel.place(x=450, y=100)
-					leftchancelabel.configure(text = "Left Chances = {}".format(left_chances))
-
-				if left_chances == 2:
-					img = Image.open('5 .jpg')
-					img = img.resize((400, 300), Image.ANTIALIAS)
-					img = ImageTk.PhotoImage(img)
-					imLabel = tk.Label(window, image=img)
-					imLabel.place(x=450, y=100)
-					leftchancelabel.configure(text = "Left Chances = {}".format(left_chances))
-
-				if left_chances == 1:
+				#如果選擇再玩一次
+				if gameover == True:
+					#重置剩餘機會
+					left_chances = 5
+					time = 120
+					wrong_word = ""
+					
+					#選擇單字
+					chooseword()
+					
+					"""
 					img = Image.open('6 .jpg')
 					img = img.resize((400, 300), Image.ANTIALIAS)
 					img = ImageTk.PhotoImage(img)
 					imLabel = tk.Label(window, image=img)
 					imLabel.place(x=450, y=100)
-					leftchancelabel.configure(text = "Left Chances = {}".format(left_chances))
-				"""
-				if left_chances == 0:
-					gameover = tk.messagebox.askyesno(title = "HangMan" , message = "Game over!\nThe answer is" + "\n" + word + "\nWant to play again?")
+					imLabel.image = img
+					"""
 
-					#如果選擇再玩一次
-					if gameover == True:
-						#重置剩餘機會
-						left_chances = 5
-						time = 120
-						#選擇單字
-						chooseword()
-						wrong_word = ""
-						wrongwordlabel.configure(text = "猜錯的字：")
-						leftchancelabel.configure(text = "Left Chances = 5")
-					else:
-						window.destroy()
+					wrongwordlabel.configure(text = "猜錯的字：")
+					leftchancelabel.configure(text = "Left Chances = 5")
+				else:
+					window.destroy()
 
 #按enter也可以輸入的function
 def call_inputWord(event):

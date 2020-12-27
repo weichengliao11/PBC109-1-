@@ -98,17 +98,21 @@ def inputWord():
 
         # 如果格式正確但是猜錯的話
         else:
+
             if left_chances > 0:
-                left_chances -= 1
+                if keyword in wrong_words_list:
+                    warning = tk.messagebox.showwarning(title = "HangMan", message = "你已經錯過了！\n試試看別的字母～")
 
                 # 列出猜錯過的字
-                if keyword not in wrong_words_list:
+                else:
                     wrong_word += (keyword + "、")
 
-                # 將猜錯的字加入錯字清單
-                wrong_words_list.append(keyword)
-                wrongwordlabel.configure(text="猜錯的字：" + wrong_word)
-                leftchancelabel.configure(text="Left Chances = {}".format(left_chances))
+                    # 將猜錯的字加入錯字清單
+                    wrong_words_list.append(keyword)
+                    left_chances -= 1
+                    
+                    wrongwordlabel.configure(text="猜錯的字：" + wrong_word)
+                    leftchancelabel.configure(text="Left Chances = {}".format(left_chances))
 
 
                 if left_chances == 4:

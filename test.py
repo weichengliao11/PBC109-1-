@@ -33,7 +33,7 @@ def countdown():
 
 #主要的function
 def inputWord():
-	global left_chances , wrong_words_list , wrong_word , time
+	global left_chances , wrong_words_list , wrong_word , time , guessed_words_list , wrong_words_list
 	#取得輸入的東西
 	keyword = entry.get()
 	#如果輸入的是一個大寫的英文字母
@@ -67,6 +67,8 @@ def inputWord():
 							#重置剩餘機會
 							left_chances = 5
 							time = 120
+							guessed_words_list = []
+							wrong_words_list = []
 							chooseword()
 							wrong_word = ""
 							wrongwordlabel.configure(text = "猜錯的字：")
@@ -163,7 +165,8 @@ def inputWord():
 					left_chances = 5
 					time = 120
 					wrong_word = ""
-					
+					guessed_words_list = []
+					wrong_words_list = []
 					#選擇單字
 					chooseword()
 					

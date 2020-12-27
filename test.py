@@ -102,7 +102,7 @@ def inputWord():
                 left_chances -= 1
 
                 # 列出猜錯過的字
-                if wrong_word not in wrong_words_list:
+                if keyword not in wrong_words_list:
                     wrong_word += (keyword + "、")
 
                 # 將猜錯的字加入錯字清單

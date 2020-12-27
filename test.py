@@ -59,7 +59,6 @@ def inputWord():
     # 清除輸入框
     inputEntry.delete(0, "end")
 
-
     # 如果輸入的字母為謎底的其中一個且還沒猜過這個字母的話
     if (keyword in word) and keyword not in guessed_words_list and len(keyword) == 1:
         for i in range(word_len):

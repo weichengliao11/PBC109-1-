@@ -189,46 +189,46 @@ def call_inputWord(event):
 
 window = tk.Tk()
 window.title("HangMan")
-window.geometry("900x480")
-window.configure(bg = "gray")
+window.geometry("1000x520")
+window.configure(bg = "LightGrey")
 #Labels
 #標題
-introlabel = tk.Label(window, text = "HangMan Game" , font = ("" , 72) , bg = "gray" , fg = "black")
-introlabel.place(x = 200 , y = 0)
+introlabel = tk.Label(window, text = "- HangMan Game -" , font = ("" , 44) , bg = "LightGrey" , fg = "black")
+introlabel.place(x = 300 , y = 15)
 
-wordlabel = tk.Label(window, text = "Guess" , font = ("" , 25) , bg = "gray" , fg = "blue")
-wordlabel.place(x = 50 , y = 100)
+wordlabel = tk.Label(window, text = "Guess" , font = ("" , 25) , bg = "LightGrey" , fg = "DarkOliveGreen")
+wordlabel.place(x = 600 , y = 100)
 
 #謎底
-guesslabel = tk.Label(window, text = "" , font = ("" , 25) , bg = "gray" , fg = "blue")
-guesslabel.place(x = 50 , y = 150)
+guesslabel = tk.Label(window, text = "" , font = ("" , 25) , bg = "LightGrey" , fg = "DarkOliveGreen")
+guesslabel.place(x = 600 , y = 150)
 
 #遊戲規則
-rulelabel = tk.Label(window, text = "遊戲規則：\n簡單來說，就是猜英文單字遊戲！\n如果你猜不到單字或是沒有在時間內猜完\n牙籤人就會被吊死><\n請在空白格內輸入「一個英文字母」\n「＊」符號代表英文單字的長度，有幾個「＊」就有幾個字母\n若該字母有出現在單字中，按下送出後字母會出現在正確的位置上\n若該字母不在單字中，代表你猜錯了\n牙籤人會逐漸邁向死亡!\n你有五次猜錯字母的機會以及120秒的時間，加油！\n（注意：一次只能輸入一個英文字母" , font = ("" , 14) , bg = "yellow" , fg = "black")
-rulelabel.place(x = 450 , y = 100)
+rulelabel = tk.Label(window, text = "遊戲規則：\n\n簡單來說，就是猜英文單字遊戲！\n如果你猜不到單字或是沒有在時間內猜完，牙籤人就會被吊死\n\n請在空白格內輸入「一個英文字母」，\n「＊」符號代表英文單字的長度，有幾個「＊」就有幾個字母。\n若該字母有出現在單字中，按下送出後字母會出現在正確的位置上；\n若該字母不在單字中，代表你猜錯了，牙籤人會逐漸邁向死亡！\n\n你有五次猜錯字母的機會以及120秒的時間，趕快猜猜看吧，加油！\n（注意：一次只能輸入一個英文字母）" , font = ("" , 16) , bg = "LightGrey" , fg = "black" , justify = "left")
+rulelabel.place(x = 50 , y = 135)
 
 #剩餘機會
-leftchancelabel = tk.Label(window, text = "Left Chances = 5" , font = ("" , 25) , bg = "gray" , fg = "black")
-leftchancelabel.place(x = 450 , y = 412)
+leftchancelabel = tk.Label(window, text = "Left Chances = 5" , font = ("" , 20) , bg = "LightGrey" , fg = "black")
+leftchancelabel.place(x = 600 , y = 360)
 
 #錯字
-wrongwordlabel = tk.Label(window, text = "猜錯的字：" , font = ("" , 20) , bg = "yellow" , fg = "black")
-wrongwordlabel.place(x = 50 , y = 270)
+wrongwordlabel = tk.Label(window, text = "猜錯的字：" , font = ("" , 20) , bg = "LightGrey" , fg = "black")
+wrongwordlabel.place(x = 600 , y = 330)
 
 #倒數計時器
-timelabel = tk.Label(window, text = "10sec" , font = ("" , 20) , bg = "blue" , fg = "white")
-timelabel.place(x = 450 , y = 300)
+timelabel = tk.Label(window, text = "10sec" , font = ("" , 20) , bg = "Orange" , fg = "white")
+timelabel.place(x = 50 , y = 400)
 
 
 #Entry
 entry = tk.StringVar()
 inputEntry = tk.Entry(window, font = ("" , 25) , justify = "center" , textvariable = entry)
-inputEntry.place(x = 50 , y = 200)
+inputEntry.place(x = 600 , y = 200)
 
 #button
 #送出輸入的東西的按鈕
-button1 = tk.Button(window, text = "送出" , font = ("" , 25) , bg = "black" , fg = "red" , command = inputWord)
-button1.place(x = 50 , y = 300)
+button1 = tk.Button(window, text = "送出" , font = ("" , 25) , bg = "black" , fg = "DarkOliveGreen" , command = inputWord)
+button1.place(x = 600 , y = 270)
 #按enter鍵也能輸入的function
 window.bind("<Return>" , call_inputWord)
 

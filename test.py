@@ -75,6 +75,12 @@ def inputWord():
                 if ans == word:
                     message = tk.messagebox.askyesno(title="HangMan",
                                                      message="你贏了！\n答案是" + "\n" + word + "\n想再玩一次嗎？")
+                    img = Image.open('7 .jpg')
+                    img = img.resize((560, 350), Image.ANTIALIAS)
+                    img = ImageTk.PhotoImage(img)
+                    imLabel = tk.Label(window, image=img)
+                    imLabel.place(x=25, y=150)
+                    imLabel.image = img
 
                     # 如果要再玩一次的話
                     if message == True:
